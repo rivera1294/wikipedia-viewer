@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+
+p {
+    
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: cyan;
+}
+
+.wrapper {
+    width: 1440px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+
+.container.heading{
+    width: 400px;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.container input {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    height: 40px;
+    width: 270px;
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 2px solid #374E65;
+    outline: none;
+    font-size: 1.2em;
+}
+
+.container.articles {
+    margin-top: 20px;
+}
+
+.article {
+    background: grey;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
