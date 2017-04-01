@@ -1,21 +1,30 @@
 (function($){
     var wikipediaViewer = {
-        url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=",
+        
 
-        search: function() {
-            var query = $("#search").val();
-            $.get(this.url + query).done(function(response) {
-                this.updateUI(response);
+        search: function(searchTerm) {
+            
+            
+            $.ajax({
+                url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + searchTerm + "&format=json&callback=?",
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    this.updateUI(data);
+                    
+                }.bind(this)
             })
+           
         },
 
         updateUI: function(response) {
-            var titles = response[1].forEach(function(title){
-                var $title = $(".article");
-            $title.append(
-                $('<h2>').text(title)
-            )
-            })
+            
+            var $articles = $(".articles").html("");
+            for(var i = 0; i < response[1].length; i++) {
+                $(".articles").prepend("<a href=" + response[3][i] + " target='_blank'><div class='article'><h2>" + response[1][i] + "</h2><p>" + response[2][i] + "</p></div</a>");
+            }
+           
+            console.log(response);
             
         }
         
@@ -30,8 +39,9 @@
 $(document).ready(function() {
     $('#search-form').submit(function(event) {
         event.preventDefault();
-        wikipediaViewer.search();
-        return false;
+        var searchTerm = $("#search").val();
+        wikipediaViewer.search(searchTerm);
+        
     });
   
 });
